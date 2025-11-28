@@ -1,3 +1,19 @@
+/* Global defaults to avoid unexpected overflow */
+*, *::before, *::after {
+    box-sizing: border-box;
+}
+
+/* prevent horizontal scroll on small screens */
+html, body {
+    overflow-x: hidden;
+}
+
+/* make media scale down to container width */
+img, video {
+    max-width: 100%;
+    height: auto;
+}
+
 body {
     font-family: 'Google Sans Flex', sans-serif;
     display: flex;
@@ -8,7 +24,7 @@ body {
     margin: 0;
     background: linear-gradient(135deg, #485461 0%, #28313b 100%);
     transition: background-color 0.5s;
-    overflow-x: hidden;
+    /* already handled above */
 }
 
 .container {
@@ -113,6 +129,8 @@ body.selection-done .scratch-card:not(.is-scratched) {
     height: 100%;
     transition: opacity 0.8s ease;
     cursor: crosshair;
+    /* ensure touch/pointer input isn't hijacked by scrolling/pinching */
+    touch-action: none;
     overflow: hidden;
     z-index: 3;
 }
